@@ -146,8 +146,18 @@ add_executable(
   example/${PROJECT_NAME}_teleop.cpp
 )
 
+add_executable(
+  ${PROJECT_NAME}_report
+  example/${PROJECT_NAME}_report.cpp
+)
+
 target_include_directories(
   ${PROJECT_NAME}_teleop PUBLIC
+  include
+)
+
+target_include_directories(
+  ${PROJECT_NAME}_report PUBLIC
   include
 )
 
@@ -157,8 +167,19 @@ add_dependencies(
   ${catkin_EXPORTED_TARGETS}
 )
 
+add_dependencies(
+  ${PROJECT_NAME}_report
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+)
+
 target_link_libraries(
   ${PROJECT_NAME}_teleop
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(
+  ${PROJECT_NAME}_report
   ${catkin_LIBRARIES}
 )
 
